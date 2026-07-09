@@ -1,10 +1,13 @@
 // src/features/auth/components/LoginForm.tsx
 
 import { useState, type FormEvent } from 'react';
+import {Link} from 'react-router-dom';
+
 import { Button } from '@/shared/components/Button';
 import { Input } from '@/shared/components/Input';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useLogin } from '../hooks/useLogin';
+import {ROUTES} from '@/shared/constants/routes';
 
 export function LoginForm() {
   const { submitLogin, isLoading, errorMessage } = useLogin();
@@ -58,6 +61,10 @@ export function LoginForm() {
           '로그인'
         )}
       </Button>
+      
+      <Link to={ROUTES.SIGNUP} className="button button--secondary button--full">
+        회원가입
+      </Link>
     </form>
   );
 }

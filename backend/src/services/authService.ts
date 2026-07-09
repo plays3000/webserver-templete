@@ -67,6 +67,8 @@ export async function signup(data: SignupRequest): Promise<AuthResponse> {
 
     const user = await UserModel.create({
         username: data.username,
+        firstname: data.firstname,
+        lastname: data.lastname,
         email: data.email,
         passwordHash,
         roles: normalizeRoles(data.roles),

@@ -392,3 +392,9 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+.signup-form{
+  max-width: 460px;
+  margin: 0 auto;
+  padding-top: 108px;
+}
