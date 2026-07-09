@@ -21,6 +21,7 @@ const signinSchema = z.object({
     password: z.string().trim().min(1, '비밀번호를 입력해주세요.'),
 });
 
+
 router.post(
     '/signup',
     validateBody(signupSchema),
