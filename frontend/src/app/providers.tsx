@@ -28,5 +28,5 @@ export function AppProviders({children} : AppProvidersProps){
 };
 `
 AppProviders는 children이라는 값을 받는다.
-그 children은 React 화면 요소여야 한다.
-`
+그 children은 React 화면 요소여야 한다.ass
+` 
