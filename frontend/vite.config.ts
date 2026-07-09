@@ -21,7 +21,7 @@ export default ({mode}: any) => {
   const proxy_url = 
     process.env.VITE_DEV_REMOTE === "remote"
     ? process.env.VITE_BACKEND_SERVER
-    : 'http://localhost:8888/';
+    : 'http://localhost:4793/';
   
     const base = process.env.VITE_BASE_PATH || '/';
 

@@ -5,6 +5,7 @@ import { useAuth } from '@/features/auth/hooks/useAuth';
 
 export function MainLayout() {
   const { user, logout } = useAuth();
+  const fullname = [user?.firstname, user?.lastname].filter(Boolean).join(' ')
 
   return (
     <div className="main-layout">
@@ -14,7 +15,7 @@ export function MainLayout() {
         </div>
 
         <div className="main-header__user">
-          <span>{user?.username}</span>
+          <span>{fullname}</span>
 
           <button type="button" onClick={logout}>
             로그아웃

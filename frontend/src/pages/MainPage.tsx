@@ -15,8 +15,8 @@ export function MainPage() {
 
             <dl className='user-info'>
                 <div>
-                    <dt>사용자 ID</dt>
-                    <dd>{user?.id}</dd>
+                    <dt>사용자 이름</dt>
+                    <dd>{user?.lastname}</dd>
                 </div>
                 <div>
                     <dt>아이디</dt>

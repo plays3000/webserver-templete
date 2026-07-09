@@ -10,6 +10,8 @@ export type LoginRequest = {
 export type AuthUser = {
   id: number;
   username: string;
+  firstname: string;
+  lastname: string;
   email: string;
   roles: UserRole[];
   accessToken: string;
