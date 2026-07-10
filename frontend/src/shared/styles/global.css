@@ -287,7 +287,7 @@ a {
   width: 100%;
   max-width: 720px;
   padding: 28px;
-  align-self: center;
+  /* align-self: center; */
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
@@ -323,6 +323,10 @@ a {
 
 .menu-grid {
   display: grid;
+  /* width: 100%;
+  max-width: 720px;
+  padding: 28px;
+  align-self: center; */
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
