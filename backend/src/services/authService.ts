@@ -122,3 +122,23 @@ export async function getMe(userId: string): Promise<Omit<AuthResponse, 'accessT
         roles: user.roles as UserRole[],
     }
 }
+
+export async function deleteMe(userId: string, password: string){
+    const user = await UserModel.findById(userId);
+
+    if (!user){
+        throw new Error(`사용자를 찾을 수 없습니다`);
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+
+    if(!isPasswordValid){
+        throw new Error('비밀번호가 올바르지 않습니다.');
+    }
+
+    await UserModel.deleteOne({
+        _id: user._id,
+    });
+    return {
+        message: '회원 탈퇴가 완료되었습니다.',
+    }
+}

@@ -1,19 +1,19 @@
 // src/features/auth/contexts/AuthContext.tsx
 
 import {
-  createContext,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
-import type { AuthContextValue, AuthUser } from '../types/authTypes';
+import type { AuthUser } from '../types/authTypes';
 import {
   getStoredUser,
   removeStoredUser,
   saveUser,
 } from '../utils/tokenStorage';
-
-export const AuthContext = createContext<AuthContextValue | null>(null);
+import {deleteAccountApi} from '../api/authApi';
+import type {DeleteAccountRequest} from '../types/authTypes';
+import {AuthContext} from './authContext';
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -31,19 +31,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
     removeStoredUser();
     setUser(null);
   };
+  const deleteAccount = async (data: DeleteAccountRequest) => {
+    await deleteAccountApi(data);
+    removeStoredUser();
+    setUser(null);
+  }
 
-  const value = useMemo<AuthContextValue>(() => {
-    const roles = user?.roles ?? [];
-
-    return {
+  const value = useMemo(
+    () => ({
       user,
       isAuthenticated: Boolean(user),
-      isAdmin: roles.includes('ROLE_ADMIN'),
-      isModerator: roles.includes('ROLE_MODERATOR'),
+      isAdmin: user?.roles.includes('ROLE_ADMIN') ?? false,
+      isModerator: user?.roles.includes('ROLE_MODERATOR') ?? false,
       login,
       logout,
-    };
-  }, [user]);
+      deleteAccount,
+    }),
+    [user],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

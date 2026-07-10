@@ -3,7 +3,7 @@ import {z} from 'zod';
 import {validateBody} from '../middlewares/validateRequest';
 import {asyncHandler} from '../middlewares/errorMiddleware';
 import {authenticateToken} from '../middlewares/authMiddleware';
-import {getMe, signin, signup} from '../services/authService';
+import {getMe, signin, signup, deleteMe} from '../services/authService';
 
 const router = Router();
 
@@ -19,6 +19,13 @@ const signupSchema = z.object({
 const signinSchema = z.object({
     username: z.string().trim().min(1, '아이디를 입력해주세요.'),
     password: z.string().trim().min(1, '비밀번호를 입력해주세요.'),
+});
+
+const deleteAccountSchema = z.object({
+    password: z.string().trim().min(1, '비밀번호를 입력해주세요'),
+    confirmText: z.string().refine(value=> value === 'DELETE', {
+        message: '삭제 확인을 위해 "DELETE"를 입력해주세요.',
+    }),
 });
 
 
@@ -49,6 +56,21 @@ router.get(
             });
         }
         const result = await getMe(req.user.userId);
+        return res.status(200).json(result);
+    })
+);
+
+router.delete(
+    '/me',
+    authenticateToken,
+    validateBody(deleteAccountSchema),
+    asyncHandler(async (req, res)=>{
+        if(!req.user){
+            return res.status(401).json({
+                message: '인증 정보가 없습니다.',
+            });
+        }
+        const result = await deleteMe(req.user.userId, req.body.password);
         return res.status(200).json(result);
     })
 );

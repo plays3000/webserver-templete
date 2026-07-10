@@ -4,6 +4,7 @@ import {LoginPage} from '@/pages/LoginPage';
 import {MainPage} from '@/pages/MainPage';
 import {NotFoundPage} from '@/pages/NotFoundPage';
 import {SignupPage} from '@/pages/SignupPage';
+import { DeleteAccountPage } from '@/pages/DeleteAccountPage';
 
 import {AuthLayout} from '@/layouts/AuthLayout';
 import {MainLayout} from '@/layouts/MainLayout';
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: ROUTES.MAIN,
                 element: <MainPage />,
+            },
+            {
+                path: ROUTES.DELETE_ACCOUNT,
+                element: <DeleteAccountPage />
             }
         ]
     },

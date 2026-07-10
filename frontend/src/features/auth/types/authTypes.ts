@@ -16,7 +16,7 @@ export type SignupRequest = {
 }
 
 export type AuthUser = {
-  id: number;
+  id: string;
   username: string;
   firstname: string;
   lastname: string;
@@ -35,4 +35,14 @@ export type AuthContextValue = {
   isModerator: boolean;
   login: (user: AuthUser) => void;
   logout: () => void;
+  deleteAccount: (data: DeleteAccountRequest)=> Promise<void>;
 };
+
+export type DeleteAccountRequest = {
+  password: string;
+  confirmText: string;
+};
+
+export type DeleteAccountResponse = {
+  message: string;
+}
